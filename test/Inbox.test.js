@@ -16,13 +16,16 @@ beforeEach(async () =>{
   // using one of these accounts to deploy the Contracts
 
     inbox=  await new web3.eth.Contract(JSON.parse(interface))
-    .deploy({data : bytecode , arguments: ['Hi There!']})
+    .deploy({
+      data : bytecode ,
+      arguments: ['Hi There!']
+     })
     .send({from : accounts[0], gas: '1000000'});
 });
 
 describe('Inbox',() =>{
   it('deploys a contract' , () =>{
-    assert.ok(inbox.options.address);  
+    assert.ok(inbox.options.address);
   });
   it ('it has a default message',async ()=>{
     const message = await inbox.methods.message().call();
